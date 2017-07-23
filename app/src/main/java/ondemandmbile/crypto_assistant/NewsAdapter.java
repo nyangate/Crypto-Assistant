@@ -1,6 +1,10 @@
 package ondemandmbile.crypto_assistant;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -42,12 +46,14 @@ public class NewsAdapter extends RecyclerView.Adapter {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView title, description,link,pubdate;
+        public CardView cardView;
 
         public ViewHolder(View convertView) {
             super(convertView);
             title = (TextView) convertView.findViewById(R.id.title);
             description = (TextView) convertView.findViewById(R.id.description);
             pubdate = (TextView) convertView.findViewById(R.id.pubdate);
+            cardView = (CardView) convertView.findViewById(R.id.card_view);
 
 
         }
@@ -72,6 +78,14 @@ public class NewsAdapter extends RecyclerView.Adapter {
         ((ViewHolder)holder).title.setText(article.getTitle());
         ((ViewHolder)holder).pubdate.setHint(article.getPubDate());
         ((ViewHolder)holder).description.setText(Html.fromHtml(article.getDescription()));
+        ((NewsAdapter.ViewHolder)holder).cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(new Intent(context,ArticleView.class));
+                intent.putExtra("url",article.getLink());
+                (context).startActivity(intent);
+            }
+        });
     }
 
     @Override

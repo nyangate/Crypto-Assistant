@@ -1,6 +1,8 @@
 package ondemandmbile.crypto_assistant;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -47,10 +49,12 @@ public class MarketAdapter extends RecyclerView.Adapter {
         public TextView name, buy,sell;
         public Toolbar toolbar;
         public ImageView image;
+        public CardView card_view;
 
         public ViewHolder(View convertView) {
             super(convertView);
             name = (TextView) convertView.findViewById(R.id.currency);
+            card_view = (CardView) convertView.findViewById(R.id.card_view);
             buy = (TextView) convertView.findViewById(R.id.buying);
             sell = (TextView) convertView.findViewById(R.id.selling);
 
@@ -80,6 +84,7 @@ public class MarketAdapter extends RecyclerView.Adapter {
                 (competitor.getBuy()));
         ((ViewHolder)holder).sell.setText(competitor.getSymbol()+" "+decimalFormat.format
                 (competitor.getSell()));
+
     }
 
     @Override

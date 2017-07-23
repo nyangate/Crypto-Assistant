@@ -2,12 +2,7 @@ package ondemandmbile.crypto_assistant;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +11,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.orhanobut.logger.Logger;
-
-import java.util.ArrayList;
 
 /**
  * Created by robertnyangate on 22/07/2017.
@@ -54,6 +47,36 @@ public class MWebFragment extends Fragment {
                 false);
 
         initializeViews(rootView);
+        try {
+            ((MainActivity)getActivity()).onbackClickedListner=new MainActivity.OnbackClickedListner() {
+                @Override
+                public void onBackClicked() {
+                    if(webView.canGoBack()){
+                        webView.goBack();
+                    }else{
+                        ((MainActivity)getActivity()).onBackPressed();
+                    }
+                }
+            };
+        }catch (Exception e){
+            Logger.d(e);
+        }
+        try {
+            ((ArticleView)getActivity()).onbackClickedListner=new ArticleView.OnbackClickedListner() {
+                @Override
+                public void onBackClicked() {
+                    if(webView.canGoBack()){
+                        webView.goBack();
+                    }else {
+                        ((ArticleView)getActivity()).onBackPressed();
+                    }
+                }
+            };
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         return rootView;
     }
 
@@ -61,6 +84,7 @@ public class MWebFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUrl(webView,url);
+
     }
 
 
