@@ -8,9 +8,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TabHost;
 
 import com.orhanobut.logger.Logger;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import ondemandmbile.crypto_assistant.models.Site;
 
 
@@ -26,7 +29,7 @@ import ondemandmbile.crypto_assistant.models.Site;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class MarketFragment extends Fragment {
+public class MarketFragment extends Fragment{
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
@@ -62,7 +65,7 @@ public class MarketFragment extends Fragment {
                 realm.copyToRealmOrUpdate(site);
             }
         });
-        sites=realm.where(Site.class).findAll();
+        sites=realm.where(Site.class).findAll().sort("name", Sort.ASCENDING);
 
         //get a database instance
     }
@@ -72,6 +75,7 @@ public class MarketFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.markets, container,
                 false);
+
         initializeViews(rootView);
         return rootView;
     }
@@ -114,6 +118,9 @@ public class MarketFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
     }
+    private MWebFragment currFragment;
+
+
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -123,12 +130,9 @@ public class MarketFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            Logger.d(position);
-            switch (position) {
-                default:
-                return MWebFragment.newInstance(sites.get(position).getUrl());
+            return MWebFragment.newInstance(sites.get(position).getUrl());
 
-            }
+
         }
 
         @Override
@@ -150,4 +154,6 @@ public class MarketFragment extends Fragment {
             }
         }
     }
+
+
 }

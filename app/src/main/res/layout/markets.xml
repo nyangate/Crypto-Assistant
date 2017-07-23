@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:background="@color/colorPrimaryDark"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add_white_36dp"/>
 </RelativeLayout>

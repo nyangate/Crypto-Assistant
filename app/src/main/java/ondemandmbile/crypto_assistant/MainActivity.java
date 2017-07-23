@@ -6,12 +6,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
+    public OnbackClickedListner onbackClickedListner;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -73,4 +75,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if(onbackClickedListner!=null) {
+            onbackClickedListner.onBackClicked();
+            Logger.d("interface actively checked");
+        }
+        else {
+            super.onBackPressed();
+        }
+
+    }
+    public interface OnbackClickedListner{
+        public void onBackClicked();
+    }
+
 }

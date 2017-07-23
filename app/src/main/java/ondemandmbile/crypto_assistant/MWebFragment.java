@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 public class MWebFragment extends Fragment {
     private String url;
     private WebView webView;
+    private ContentLoadingProgressBar contentpbar;
     public static MWebFragment newInstance(String url) {
 
         Bundle args = new Bundle();
@@ -40,21 +42,25 @@ public class MWebFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //get a database instance
     }
+    public void loadUrl(String url){
+        if(webView!=null)
+        webView.loadUrl(url);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.web_view, container,
                 false);
+
         initializeViews(rootView);
-        setUrl(webView,url);
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        setUrl(webView,url);
     }
 
 
@@ -69,27 +75,41 @@ public class MWebFragment extends Fragment {
      * */
     private void initializeViews(View rootView) {
         webView=(WebView)rootView.findViewById(R.id.webview);
+        contentpbar=(ContentLoadingProgressBar) rootView.findViewById(R.id.contentpbar);
     }
 
-    private void setUrl(WebView webView,String url) {
+    private void setUrl(WebView vistaWeb,String url) {
+        vistaWeb.clearCache(true);
+        vistaWeb.clearHistory();
+        vistaWeb.getSettings().setJavaScriptEnabled(true);
+        vistaWeb.getSettings().setUseWideViewPort(true);
+        vistaWeb.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.setWebViewClient(new WebViewClient(){
-
+//        webView.getSettings().setJavaScriptEnabled(true);
+        vistaWeb.getSettings().setLoadWithOverviewMode(true);
+        vistaWeb.setWebViewClient(new WebViewClient(){
+//
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                showProgressBar(true);
                 view.loadUrl(url);
 
                 return true;
             }
             @Override
             public void onPageFinished(WebView view, final String url) {
+                showProgressBar(false);
             }
         });
 
-        webView.loadUrl(url);
+        vistaWeb.loadUrl(url);
 
     }
+
+    private void showProgressBar(boolean b) {
+
+        if(b)contentpbar.show();
+        else contentpbar.hide();
+    }
+
 }
