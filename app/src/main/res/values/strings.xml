@@ -2,5 +2,8 @@
     <string name="app_name">Crypto-Assistant</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_notifications">Notification</string>
+    <string name="title">Title</string>
+    <string name="description">description www.google.com</string>
+    <string name="projections">Markets</string>
 </resources>

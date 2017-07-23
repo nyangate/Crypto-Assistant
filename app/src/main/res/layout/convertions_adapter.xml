@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+        android:orientation="horizontal">
+            <TextView android:id="@+id/bought"
+                      android:layout_width="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:textColorHint="@color/colorPrimaryDark"
+                      android:textSize="11sp"
+                      android:layout_height="wrap_content"
+                      android:hint="Buy"/>
+            <TextView android:id="@+id/buying"
+                      android:layout_width="wrap_content"
+                      android:paddingLeft="5dp"
+                      android:textStyle="bold"
+                      android:layout_height="wrap_content"
+                      android:hint="Buy"/>
+        </LinearLayout>
+
+        <TextView android:id="@+id/currency"
+                  android:layout_width="wrap_content"
+                  android:textStyle="bold"
+                  android:gravity="center"
+                  android:padding="5dp"
+                  android:layout_gravity="center"
+                  android:textColor="@color/colorAccent"
+                  android:layout_height="wrap_content"
+                  android:text="Currency"/>
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal">
+        <TextView android:id="@+id/sold"
+                  android:layout_width="wrap_content"
+                  android:paddingLeft="5dp"
+                  android:textSize="11sp"
+                  android:textColorHint="@color/colorRed"
+                  android:layout_height="wrap_content"
+                  android:hint="Sell"/>
+        <TextView android:id="@+id/selling"
+                  android:paddingLeft="5dp"
+                  android:textStyle="bold"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="Sell"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

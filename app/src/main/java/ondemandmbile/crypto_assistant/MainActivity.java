@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity {
-
+    BottomNavigationView navigation;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -21,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    showMarketsFragment();
                     return true;
                 case R.id.navigation_dashboard:
                     showDashboard();
                     return true;
                 case R.id.navigation_notifications:
+                    showNewsFrag();
                     return true;
             }
             return false;
@@ -33,24 +35,42 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
+    private void showNewsFrag() {
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation= (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        showDashboard();
+        navigation.setSelectedItemId(R.id.navigation_dashboard);
     }
     private void showDashboard() {
 
         try {
             FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.content, MarketFragment.newInstance()).commitAllowingStateLoss();
+            fm.beginTransaction().replace(R.id.content, DashboardFragment.newInstance())
+                    .commitAllowingStateLoss();
         } catch (Exception e) {
             Logger.d(e);
         }
 
-//        navigation.setSelectedItemId(R.id.navigation_dashboard);
+
+    }
+    private void showMarketsFragment() {
+
+        try {
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.content, MarketFragment.newInstance())
+                    .commitAllowingStateLoss();
+        } catch (Exception e) {
+            Logger.d(e);
+        }
+
+
     }
 }
