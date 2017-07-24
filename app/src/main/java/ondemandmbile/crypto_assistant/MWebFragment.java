@@ -49,38 +49,38 @@ public class MWebFragment extends Fragment {
                 false);
 
         initializeViews(rootView);
-        if(isMain) {
-            try {
-                ((MainActivity) getActivity()).onbackClickedListner = new MainActivity.OnbackClickedListner() {
-                    @Override
-                    public void onBackClicked() {
-                        if (webView.canGoBack()) {
-                            webView.goBack();
-                        } else {
-                            ((MainActivity) getActivity()).onBackPressed();
-                        }
-                    }
-                };
-            } catch (Exception e) {
-                Logger.d(e);
-            }
-        }
-        else {
-            try {
-                ((ArticleView) getActivity()).onbackClickedListner = new ArticleView.OnbackClickedListner() {
-                    @Override
-                    public void onBackClicked() {
-                        if (webView.canGoBack()) {
-                            webView.goBack();
-                        } else {
-                            ((ArticleView) getActivity()).onBackPressed();
-                        }
-                    }
-                };
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        if(isMain) {
+//            try {
+//                ((MainActivity) getActivity()).onbackClickedListner = new MainActivity.OnbackClickedListner() {
+//                    @Override
+//                    public void onBackClicked() {
+//                        if (webView.canGoBack()) {
+//                            webView.goBack();
+//                        } else {
+//                            ((MainActivity) getActivity()).onBackPressed();
+//                        }
+//                    }
+//                };
+//            } catch (Exception e) {
+//                Logger.d(e);
+//            }
+//        }
+//        else {
+//            try {
+//                ((ArticleView) getActivity()).onbackClickedListner = new ArticleView.OnbackClickedListner() {
+//                    @Override
+//                    public void onBackClicked() {
+//                        if (webView.canGoBack()) {
+//                            webView.goBack();
+//                        } else {
+//                            ((ArticleView) getActivity()).onBackPressed();
+//                        }
+//                    }
+//                };
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
 
 
         return rootView;
@@ -128,7 +128,13 @@ public class MWebFragment extends Fragment {
             }
             @Override
             public void onPageFinished(WebView view, final String url) {
-                showProgressBar(false);
+                contentpbar.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showProgressBar(false);
+                    }
+                },8000);
+
             }
         });
 
