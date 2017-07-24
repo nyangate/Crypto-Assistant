@@ -29,7 +29,7 @@ import ondemandmbile.crypto_assistant.models.Site;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class MarketFragment extends Fragment{
+public class MarketFragment extends SuperFragment{
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private FloatingActionButton fab;
@@ -130,7 +130,8 @@ public class MarketFragment extends Fragment{
 
         @Override
         public Fragment getItem(int position) {
-            return MWebFragment.newInstance(sites.get(position).getUrl(),true);
+            currFragment=MWebFragment.newInstance(sites.get(position).getUrl(),true);
+            return currFragment;
 
 
         }
@@ -155,5 +156,8 @@ public class MarketFragment extends Fragment{
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        currFragment.onBackPressed();
+    }
 }

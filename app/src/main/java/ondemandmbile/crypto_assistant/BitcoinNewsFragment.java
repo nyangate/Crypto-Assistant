@@ -31,7 +31,7 @@ import ondemandmbile.crypto_assistant.models.Article;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class BitcoinNewsFragment extends Fragment {
+public class BitcoinNewsFragment extends SuperFragment {
     private RecyclerView articleRecyclerView;
     private Realm realm;
     private RealmResults<Article> articles;
@@ -175,5 +175,10 @@ public class BitcoinNewsFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         realm.close();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

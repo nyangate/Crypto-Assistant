@@ -28,7 +28,7 @@ import ondemandmbile.crypto_assistant.models.Currency;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends SuperFragment {
     private Realm realm;
     private RecyclerView currencyRecycler;
     private RealmResults<Currency>rates;

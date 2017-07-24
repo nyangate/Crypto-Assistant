@@ -16,19 +16,20 @@ import com.orhanobut.logger.Logger;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class MWebFragment extends Fragment {
+public class MWebFragment extends SuperFragment {
     private String url;
     private WebView webView;
     private boolean isMain;
     private ContentLoadingProgressBar contentpbar;
-    public static MWebFragment newInstance(String url,boolean isMain) {
+
+    public static MWebFragment newInstance(String url, boolean isMain) {
 
         Bundle args = new Bundle();
 
         MWebFragment fragment = new MWebFragment();
         fragment.setArguments(args);
-        fragment.url=url;
-        fragment.isMain=isMain;
+        fragment.url = url;
+        fragment.isMain = isMain;
         return fragment;
     }
 
@@ -37,9 +38,10 @@ public class MWebFragment extends Fragment {
         super.onCreate(savedInstanceState);
         //get a database instance
     }
-    public void loadUrl(String url){
-        if(webView!=null)
-        webView.loadUrl(url);
+
+    public void loadUrl(String url) {
+        if (webView != null)
+            webView.loadUrl(url);
     }
 
     @Nullable
@@ -89,26 +91,26 @@ public class MWebFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUrl(webView,url);
+        setUrl(webView, url);
 
     }
-
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
     /**
      * Initialize recyclerview and adapters.
      * call adapter.notifyDataSetChanged if the realm for currency is updated
-     * */
+     */
     private void initializeViews(View rootView) {
-        webView=(WebView)rootView.findViewById(R.id.webview);
-        contentpbar=(ContentLoadingProgressBar) rootView.findViewById(R.id.contentpbar);
+        webView = (WebView) rootView.findViewById(R.id.webview);
+        contentpbar = (ContentLoadingProgressBar) rootView.findViewById(R.id.contentpbar);
     }
 
-    private void setUrl(WebView vistaWeb,String url) {
+    private void setUrl(WebView vistaWeb, String url) {
         vistaWeb.clearCache(true);
         vistaWeb.clearHistory();
         vistaWeb.getSettings().setJavaScriptEnabled(true);
@@ -117,8 +119,8 @@ public class MWebFragment extends Fragment {
 
 //        webView.getSettings().setJavaScriptEnabled(true);
         vistaWeb.getSettings().setLoadWithOverviewMode(true);
-        vistaWeb.setWebViewClient(new WebViewClient(){
-//
+        vistaWeb.setWebViewClient(new WebViewClient() {
+            //
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 showProgressBar(true);
@@ -126,6 +128,7 @@ public class MWebFragment extends Fragment {
 
                 return true;
             }
+
             @Override
             public void onPageFinished(WebView view, final String url) {
                 contentpbar.postDelayed(new Runnable() {
@@ -133,7 +136,7 @@ public class MWebFragment extends Fragment {
                     public void run() {
                         showProgressBar(false);
                     }
-                },8000);
+                }, 8000);
 
             }
         });
@@ -144,8 +147,16 @@ public class MWebFragment extends Fragment {
 
     private void showProgressBar(boolean b) {
 
-        if(b)contentpbar.show();
+        if (b) contentpbar.show();
         else contentpbar.hide();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        }else {
+            getActivity().onBackPressed();
+        }
+    }
 }

@@ -13,7 +13,6 @@ import com.orhanobut.logger.Logger;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navigation;
-    public OnbackClickedListner onbackClickedListner;
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -41,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    private SuperFragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private void showDashboard() {
 
         try {
+            currentFragment=DashboardFragment.newInstance();
             FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.content, DashboardFragment.newInstance())
+            fm.beginTransaction().replace(R.id.content, currentFragment)
                     .commitAllowingStateLoss();
         } catch (Exception e) {
             Logger.d(e);
@@ -66,8 +67,9 @@ public class MainActivity extends AppCompatActivity {
     private void showMarketsFragment() {
 
         try {
+            currentFragment=MarketFragment.newInstance();
             FragmentManager fm = getSupportFragmentManager();
-            fm.beginTransaction().replace(R.id.content, MarketFragment.newInstance())
+            fm.beginTransaction().replace(R.id.content,currentFragment )
                     .commitAllowingStateLoss();
         } catch (Exception e) {
             Logger.d(e);
@@ -78,17 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(onbackClickedListner!=null) {
-            onbackClickedListner.onBackClicked();
-            Logger.d("interface actively checked");
-        }
-        else {
-            super.onBackPressed();
-        }
+//        super.onBackPressed();
+        currentFragment.onBackPressed();
 
     }
-    public interface OnbackClickedListner{
-        public void onBackClicked();
-    }
+
 
 }
