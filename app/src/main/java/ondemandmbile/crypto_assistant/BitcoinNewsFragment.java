@@ -141,6 +141,7 @@ public class BitcoinNewsFragment extends Fragment {
                     @Override
                     public void execute(Realm realm) {
                         if(!arts.isEmpty()) {
+                            realm.where(Article.class).findAll().deleteAllFromRealm();
                             realm.copyToRealmOrUpdate(arts);
                             Logger.d("Changes updated");
                             Logger.d("change size "+arts.size());

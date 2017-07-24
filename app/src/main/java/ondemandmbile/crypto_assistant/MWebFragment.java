@@ -19,14 +19,16 @@ import com.orhanobut.logger.Logger;
 public class MWebFragment extends Fragment {
     private String url;
     private WebView webView;
+    private boolean isMain;
     private ContentLoadingProgressBar contentpbar;
-    public static MWebFragment newInstance(String url) {
+    public static MWebFragment newInstance(String url,boolean isMain) {
 
         Bundle args = new Bundle();
 
         MWebFragment fragment = new MWebFragment();
         fragment.setArguments(args);
         fragment.url=url;
+        fragment.isMain=isMain;
         return fragment;
     }
 
@@ -47,33 +49,37 @@ public class MWebFragment extends Fragment {
                 false);
 
         initializeViews(rootView);
-        try {
-            ((MainActivity)getActivity()).onbackClickedListner=new MainActivity.OnbackClickedListner() {
-                @Override
-                public void onBackClicked() {
-                    if(webView.canGoBack()){
-                        webView.goBack();
-                    }else{
-                        ((MainActivity)getActivity()).onBackPressed();
+        if(isMain) {
+            try {
+                ((MainActivity) getActivity()).onbackClickedListner = new MainActivity.OnbackClickedListner() {
+                    @Override
+                    public void onBackClicked() {
+                        if (webView.canGoBack()) {
+                            webView.goBack();
+                        } else {
+                            ((MainActivity) getActivity()).onBackPressed();
+                        }
                     }
-                }
-            };
-        }catch (Exception e){
-            Logger.d(e);
+                };
+            } catch (Exception e) {
+                Logger.d(e);
+            }
         }
-        try {
-            ((ArticleView)getActivity()).onbackClickedListner=new ArticleView.OnbackClickedListner() {
-                @Override
-                public void onBackClicked() {
-                    if(webView.canGoBack()){
-                        webView.goBack();
-                    }else {
-                        ((ArticleView)getActivity()).onBackPressed();
+        else {
+            try {
+                ((ArticleView) getActivity()).onbackClickedListner = new ArticleView.OnbackClickedListner() {
+                    @Override
+                    public void onBackClicked() {
+                        if (webView.canGoBack()) {
+                            webView.goBack();
+                        } else {
+                            ((ArticleView) getActivity()).onBackPressed();
+                        }
                     }
-                }
-            };
-        }catch (Exception e){
-            e.printStackTrace();
+                };
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
 

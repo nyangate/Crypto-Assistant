@@ -130,7 +130,7 @@ public class MarketFragment extends Fragment{
 
         @Override
         public Fragment getItem(int position) {
-            return MWebFragment.newInstance(sites.get(position).getUrl());
+            return MWebFragment.newInstance(sites.get(position).getUrl(),true);
 
 
         }

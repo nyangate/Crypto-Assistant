@@ -26,7 +26,7 @@ public class ArticleView extends AppCompatActivity {
         try {
             FragmentManager fm = getSupportFragmentManager();
             fm.beginTransaction().replace(R.id.md_content, MWebFragment.newInstance(getIntent()
-                    .getStringExtra("url")))
+                    .getStringExtra("url"),false))
                     .commitAllowingStateLoss();
         } catch (Exception e) {
             Logger.d(e);
