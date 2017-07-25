@@ -39,16 +39,12 @@ public class MarketAdapter extends RecyclerView.Adapter {
     }
 
 
-    public static interface OnRemoveCompe {
-        void onRemoveCompetitor(String id);
-    }
+
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView name, buy,sell;
-        public Toolbar toolbar;
-        public ImageView image;
         public CardView card_view;
 
         public ViewHolder(View convertView) {

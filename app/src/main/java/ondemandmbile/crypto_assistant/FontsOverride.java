@@ -44,7 +44,7 @@ public final class FontsOverride {
             newMap.put("sans", newTypeface);
             newMap.put("Roboto", newTypeface);
             newMap.put("Helvetica", newTypeface);
-            newMap.put("monospace", newTypeface);
+//            newMap.put("monospace", newTypeface);
             newMap.put("serif", newTypeface);
             try {
                 final Field staticField = Typeface.class

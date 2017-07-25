@@ -174,7 +174,6 @@ public class BitcoinNewsFragment extends SuperFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        realm.close();
     }
 
     @Override

@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.text.DecimalFormat;
 
 import io.realm.Realm;
@@ -33,7 +35,7 @@ import ondemandmbile.crypto_assistant.models.Site;
  * Created by robertnyangate on 22/07/2017.
  */
 
-public class NotifsFragment extends SuperFragment{
+public class NotifsFragment extends Fragment{
     private Realm realm;
     SharedPreferences sharedPreferences;
     private EditText capitalEd,bitcoinsEd;
@@ -136,18 +138,22 @@ public class NotifsFragment extends SuperFragment{
 
     private void setValue() {
         DecimalFormat df=new DecimalFormat("#,###.##");
-        double usd_sell =realm.where(Currency.class).equalTo("name","USD").findFirst().getSell();
-        double usd_buy =realm.where(Currency.class).equalTo("name","USD").findFirst().getBuy();
+        double usd_sell =0;
+        double usd_buy=0;
+        try {
+             usd_sell =realm.where(Currency.class).equalTo("name","USD").findFirst().getSell();
+             usd_buy =realm.where(Currency.class).equalTo("name","USD").findFirst().getBuy();
+
+        }catch (Exception e){
+            Logger.d(e);
+            e.printStackTrace();
+        }
         value.setText("USD "+df.format(usd_buy*sharedPreferences.getFloat("bitcoins",0)));
         profit.setText("USD "+df.format(usd_buy*sharedPreferences.getFloat("bitcoins",0)
                 -sharedPreferences.getFloat("capital",0)));
         btc_usd.setText("USD "+df.format(usd_buy));
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
 
     }
+
+
 }

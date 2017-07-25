@@ -6,8 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".CryptoAssistant"
+        android:name="ondemandmbile.crypto_assistant.CryptoAssistant"
         android:allowBackup="true"
+        android:largeHeap="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -26,6 +27,9 @@
         <activity android:name=".ArticleView"
                   android:label="Article View">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="6c28866e77519da7de0cc69b73ea37bc25f471bb" />
     </application>
 
 </manifest>

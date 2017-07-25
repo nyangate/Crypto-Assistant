@@ -100,6 +100,11 @@ public class MarketFragment extends SuperFragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
+        try {
+            realm.close();
+        }catch (Exception e){
+            Logger.d(e);
+        }
     }
     /**
      * Initialize recyclerview and adapters.
@@ -155,6 +160,7 @@ public class MarketFragment extends SuperFragment{
             }
         }
     }
+
 
     @Override
     public void onBackPressed() {
