@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_height="match_parent"
+            >
+    <android.support.v7.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardUseCompatPadding="true"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:orientation="vertical">
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:hint="Initial capital investment"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/simpleout"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_marginLeft="4dp"
+                           android:scaleType="fitXY"
+                           android:src="@mipmap/bitcoin_curr"/>
+                <EditText android:id="@+id/capital"
+                          android:layout_width="match_parent"
+                          android:gravity="center"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/md_transparent"
+                          android:hint="Capital Investment"
+                          android:inputType="numberDecimal"
+                          android:padding="4dp"/>
+            </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                        android:hint="Total no. of bitcoins"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/simpleout"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_marginLeft="4dp"
+                           android:scaleType="fitXY"
+                           android:src="@mipmap/bitcoin_bag"/>
+                <EditText android:id="@+id/bitcoins"
+                          android:layout_width="match_parent"
+                          android:gravity="center"
+                          android:layout_height="wrap_content"
+                          android:background="@drawable/md_transparent"
+                          android:hint="total no. of bitcoins"
+                          android:inputType="numberDecimal"
+                          android:padding="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView android:id="@+id/bt"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="BTC PRICE"
+                          android:typeface="monospace"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:textStyle="bold"
+                          android:padding="4dp"/>
+                <TextView android:id="@+id/btc_usd"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="0.00"
+                          android:typeface="monospace"
+                          android:layout_gravity="center"
+                          android:gravity="center"
+                          android:textStyle="bold"
+                          android:padding="4dp"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_height="wrap_content">
+                    <TextView android:id="@+id/sell"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="Investment Value"
+                              android:textColor="@color/colorPrimary"
+                              android:textStyle="bold"
+                              android:padding="4dp"/>
+                    <TextView android:id="@+id/value"
+                              android:textSize="18sp"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:hint=" USD 240"
+                              android:padding="4dp"/>
+                    <TextView android:id="@+id/pro"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text="Profits"
+                              android:textColor="@color/colorPrimary"
+                              android:textStyle="bold"
+                              android:padding="4dp"/>
+                    <TextView android:id="@+id/profit"
+                              android:textColor="@color/colorRed"
+                              android:layout_width="wrap_content"
+                              android:typeface="monospace"
+                              android:layout_height="wrap_content"
+                              android:hint="usd 240"
+                              android:padding="4dp"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:padding="5dp"
+                                            android:id="@+id/notifsrecycler">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                     showDashboard();
                     return true;
                 case R.id.navigation_notifications:
-                    showNewsFrag();
+                    showProfitsFragment();
                     return true;
             }
             return false;
@@ -36,10 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
     };
 
-    private void showNewsFrag() {
-
-
+    private void showProfitsFragment() {
+        try {
+            currentFragment=NotifsFragment.newInstance();
+            FragmentManager fm = getSupportFragmentManager();
+            fm.beginTransaction().replace(R.id.content, currentFragment)
+                    .commitAllowingStateLoss();
+        } catch (Exception e) {
+            Logger.d(e);
+        }
     }
+
     private SuperFragment currentFragment;
 
     @Override

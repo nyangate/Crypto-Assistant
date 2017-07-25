@@ -19,11 +19,11 @@ public class CryptoAssistant extends Application {
                         build();
         Realm.setDefaultConfiguration(config);
         FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/questrial_regular.ttf");
-        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/quicksand_medium.ttf");
+//        FontsOverride.setDefaultFont(this, "MONOSPACE", "fonts/quicksand_bold.ttf");
         FontsOverride.setDefaultFont(this, "SERIF", "fonts/quicksand_regular.ttf");
         FontsOverride.setDefaultFont(this, "serif", "fonts/quicksand_regular.ttf");
         FontsOverride.setDefaultFont(this, "arial", "fonts/quicksand_regular.ttf");
-        FontsOverride.setDefaultFont(this, "monospace", "fonts/quicksand_regular.ttf");
+//        FontsOverride.setDefaultFont(this, "monospace", "fonts/quicksand_bold.ttf");
         FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/quicksand_bold.ttf");
     }
 }
