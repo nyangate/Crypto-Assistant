@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }finally {
-                        Logger.d("finished updating rates");
+//                        Logger.d("finished updating rates");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -174,7 +174,7 @@ public class DashboardFragment extends Fragment {
                         @Override
                         public void execute(Realm realm) {
                             realm.copyToRealmOrUpdate(currencies);
-                            Logger.d(">>changes noted "+id);
+//                            Logger.d(">>changes noted "+id);
                         }
                     });
                 }

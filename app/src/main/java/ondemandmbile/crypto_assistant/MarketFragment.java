@@ -1,6 +1,7 @@
 package ondemandmbile.crypto_assistant;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -8,18 +9,23 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TabHost;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import io.realm.Sort;
 import ondemandmbile.crypto_assistant.models.Site;
@@ -67,6 +73,7 @@ public class MarketFragment extends SuperFragment{
         });
         sites=realm.where(Site.class).findAll().sort("name", Sort.ASCENDING);
 
+
         //get a database instance
     }
 
@@ -86,17 +93,82 @@ public class MarketFragment extends SuperFragment{
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(mSectionsPagerAdapter);
         viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
-
+        sites.addChangeListener(new RealmChangeListener<RealmResults<Site>>() {
+            @Override
+            public void onChange(RealmResults<Site> sites) {
+                mSectionsPagerAdapter.notifyDataSetChanged();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               //// TODO: 23/07/2017 add sites to show
+               showDialog();
             }
         });
     }
+    String url,name;
+    private void showDialog() {
+        new MaterialDialog.Builder(getActivity())
+                .input("www.paxful.com", null, false, new MaterialDialog.InputCallback() {
+                    @Override
+                    public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                        url=(input.toString());
+                        Logger.d(input.toString().replace("www.","").replace("http://",""));
+                        name=(input.toString().replace("www.","").replace("http://",""));
+                    }
+                }).inputType(InputType.TYPE_CLASS_TEXT)
+                .positiveText("Add site")
+                .neutralText("Remove my sites")
+                .negativeText("Cancel")
+                .cancelable(true)
+                .content("Enter your popular website correctly.")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        if(null!=name&&null!=url)
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                Site site=new Site();
+                                site.setName(name);
+                                site.setUrl(url);
+                                realm.copyToRealmOrUpdate(site);
+                                showToast("Site added");
+                                sites=realm.where(Site.class).findAll();
+                            }
+                        });
+                    }
+                })
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                    realm.where(Site.class).findAll().deleteAllFromRealm();
+                                        Site site=new Site();
+                                        site.setName("LocalBitcoins");
+                                        site.setUrl("https://localbitcoins.com/");
+
+                                        Site remitano=new Site();
+                                        remitano.setName("Remitano");
+                                        remitano.setUrl("https://remitano.com/");
+
+                                        realm.copyToRealmOrUpdate(remitano);
+                                        realm.copyToRealmOrUpdate(site);
 
 
+                            }
 
+                        });
+                        showToast("Deleted all your added sites");
+                    }
+                }).show();
+    }
+
+    void showToast(String message){
+        Toast.makeText(getActivity(), ""+message, Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -135,6 +207,7 @@ public class MarketFragment extends SuperFragment{
 
         @Override
         public Fragment getItem(int position) {
+            Logger.d("showing "+sites.get(position).getName()+" at "+sites.get(position).getUrl());
             currFragment=MWebFragment.newInstance(sites.get(position).getUrl(),true);
             return currFragment;
 
