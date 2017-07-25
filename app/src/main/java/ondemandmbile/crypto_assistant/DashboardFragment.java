@@ -70,7 +70,7 @@ public class DashboardFragment extends SuperFragment {
 
     private void updateViews() {
         /**
-         * Loads the current rates every 4 seconds
+         * Loads the current rates every 5 seconds
          * */
         currencyRecycler.postDelayed(new Runnable() {
             @Override
@@ -79,7 +79,7 @@ public class DashboardFragment extends SuperFragment {
 
                 updateViews();
             }
-        }, 3000);
+        }, 5000);
     }
     /**
      * Loads current rates from the block chain apis
