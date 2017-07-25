@@ -79,7 +79,7 @@ public class DashboardFragment extends SuperFragment {
 
                 updateViews();
             }
-        }, 4000);
+        }, 3000);
     }
     /**
      * Loads current rates from the block chain apis

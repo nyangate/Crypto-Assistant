@@ -7,6 +7,7 @@ import android.support.v4.widget.ContentLoadingProgressBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -116,7 +117,6 @@ public class MWebFragment extends SuperFragment {
         vistaWeb.getSettings().setJavaScriptEnabled(true);
         vistaWeb.getSettings().setUseWideViewPort(true);
         vistaWeb.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-
 //        webView.getSettings().setJavaScriptEnabled(true);
         vistaWeb.getSettings().setLoadWithOverviewMode(true);
         vistaWeb.setWebViewClient(new WebViewClient() {
@@ -144,6 +144,7 @@ public class MWebFragment extends SuperFragment {
         vistaWeb.loadUrl(url);
 
     }
+
 
     private void showProgressBar(boolean b) {
 
