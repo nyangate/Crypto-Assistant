@@ -54,6 +54,7 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
+    compile 'com.google.firebase:firebase-database:10.0.1'
     testCompile 'junit:junit:4.12'
 }
 apply plugin: 'realm-android'
