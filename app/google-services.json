@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "855521402843",
+    "firebase_url": "https://crypto-assistant.firebaseio.com",
+    "project_id": "crypto-assistant",
+    "storage_bucket": "crypto-assistant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855521402843:android:5f635673cdd75a6d",
+        "android_client_info": {
+          "package_name": "ondemandmbile.crypto_assistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855521402843-cofdn1kkag9nj2jp51cer2jac8llcqu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ondemandmbile.crypto_assistant",
+            "certificate_hash": "d398c238b9ca775587dc4f15d14a23f618b01764"
+          }
+        },
+        {
+          "client_id": "855521402843-eoldltr11pqh4m6e1bciaohi5rlnr6lj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeP30vmf7EvW-xEkT6zzzFpSrC5biaVRw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855521402843-eoldltr11pqh4m6e1bciaohi5rlnr6lj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
