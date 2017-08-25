@@ -45,8 +45,13 @@ public class CryptoAssistant extends Application {
         FontsOverride.setDefaultFont(this, "SANS_SERIF", "fonts/quicksand_bold.ttf");
 
         Logger.d("tokenized");
-        Logger.d(FirebaseInstanceId.getInstance().getToken());
-        setUser();
+        try {
+            Logger.d(FirebaseInstanceId.getInstance().getToken());
+            setUser();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public static void setUser() {
