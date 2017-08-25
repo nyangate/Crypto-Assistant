@@ -215,16 +215,22 @@ public class NotifsFragment extends Fragment{
         super.onDetach();
     }
     void setUser(){
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                User user=realm.where(User.class).findFirst();
-                user.setLessThan(sharedPreferences.getFloat("lessThan",0));
-                user.setGreaterThan(sharedPreferences.getFloat("greaterThan",0));
-                realm.copyToRealmOrUpdate(user);
-            }
-        });
-        Logger.d("user data set");
-        CryptoAssistant.setUser();
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    User user=realm.where(User.class).findFirst();
+                    user.setLessThan(sharedPreferences.getFloat("lessThan",0));
+                    user.setGreaterThan(sharedPreferences.getFloat("greaterThan",0));
+                    realm.copyToRealmOrUpdate(user);
+                }
+            });
+            Logger.d("user data set");
+            CryptoAssistant.setUser();
+        }catch (Exception e){
+            e.printStackTrace();
+            Logger.d(e);
+        }
+
     }
 }
